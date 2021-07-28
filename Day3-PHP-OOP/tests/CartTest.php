@@ -68,11 +68,9 @@ class CartTest extends TestCase
         $this->cart->decrease('SKU-001'); // 1
         $this->cart->decrease('SKU-001'); // 0
 
-        // $count = count($this->cart->list());
-        $item = $this->cart->list()[0];
+        $count = count($this->cart->list());
 
-        // $this->assertEquals(0, $count);
-        $this->assertEquals(0, $item->qty);
+        $this->assertEquals(0, $count);
     }
 
     public function test_remove_item()

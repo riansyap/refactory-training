@@ -38,6 +38,9 @@ class Cart
         foreach($this->cart as $key => $value){
             if($value->id==$id){
                 $this->cart[$key]->qty-=1;
+                if($this->cart[$key]->qty==0){
+                    unset($this->cart[$key]);
+                }
             }
         }
     }
