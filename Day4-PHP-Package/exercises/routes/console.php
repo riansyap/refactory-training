@@ -32,3 +32,45 @@ Artisan::command('capitalize {text}', function () {
     $text = $this->argument('text');
     $this->line(ucwords(strtolower($text)));
 })->purpose('capitalize');
+
+Artisan::command('add {numbers*}', function () {
+    $numbers = $this->argument('numbers');
+    $result=0;
+    foreach($numbers as $number){
+        $result+=$number;
+    }
+    $this->line($result);
+})->purpose('add');
+
+Artisan::command('subtract {numbers*}', function () {
+    $numbers = $this->argument('numbers');
+    $result=$numbers[0];
+    foreach($numbers as $key => $number){
+        if($key!=0){    
+            $result-=$number;
+        }
+    }
+    $this->line($result);
+})->purpose('subtract');
+
+Artisan::command('multiply {numbers*}', function () {
+    $numbers = $this->argument('numbers');
+    $result=$numbers[0];
+    foreach($numbers as $key => $number){
+        if($key!=0){    
+            $result*=$number;
+        }
+    }
+    $this->line($result);
+})->purpose('multiply');
+
+Artisan::command('divide {numbers*}', function () {
+    $numbers = $this->argument('numbers');
+    $result=$numbers[0];
+    foreach($numbers as $key => $number){
+        if($key!=0){    
+            $result/=$number;
+        }
+    }
+    $this->line($result);
+})->purpose('divide');
