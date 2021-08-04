@@ -26,16 +26,36 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $contact = new Contact();
-
-        $contact->name = $request->name;
-        $contact->description = $request->description;
-
-        $contact->save();
-
-        return [
-        'message' => 'Successfully create new contact',
+        $rules = [
+            'nama_depan' => 'required',
+            'nama_belakang' => 'required',
+            'email' => 'required|email|unique:contacts,email',
+            'telepon_ponsel' => 'required|numeric',
+            'telepon_rumah' => 'required|numeric',
         ];
+        
+        $validation = validator()->make(request()->all(), $rules);
+
+        if ($validation->passes()) {
+            $contact = new Contact();
+            
+            $contact->nama_depan = $request->nama_depan;
+            $contact->nama_belakang = $request->nama_belakang;
+            $contact->telepon_ponsel = $request->telepon_ponsel;
+            $contact->telepon_rumah = $request->telepon_rumah;
+            $contact->email = $request->email;
+            $contact->description = $request->description;
+
+            $contact->save();
+
+            return [
+            'message' => 'Successfully create new contact',
+            ];
+        } else {
+            return [
+                'message' => $validation->messages(),
+            ];
+        }
 
     }
 
@@ -59,15 +79,35 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        $contact->name = $request->name;
-        $contact->description = $request->description;
-
-        $contact->save();
-
-        return [
-        'message' => 'Successfully update a contact',
+        $rules = [
+            'nama_depan' => 'required',
+            'nama_belakang' => 'required',
+            'email' => 'required|email',
+            'telepon_ponsel' => 'required|numeric',
+            'telepon_rumah' => 'required|numeric',
         ];
+        
+        $validation = validator()->make(request()->all(), $rules);
 
+        if ($validation->passes()) {
+            
+            $contact->nama_depan = $request->nama_depan;
+            $contact->nama_belakang = $request->nama_belakang;
+            $contact->telepon_ponsel = $request->telepon_ponsel;
+            $contact->telepon_rumah = $request->telepon_rumah;
+            $contact->email = $request->email;
+            $contact->description = $request->description;
+
+            $contact->save();
+
+            return [
+            'message' => 'Successfully update new contact',
+            ];
+        } else {
+            return [
+                'message' => $validation->messages(),
+            ];
+        }
     }
 
     /**
