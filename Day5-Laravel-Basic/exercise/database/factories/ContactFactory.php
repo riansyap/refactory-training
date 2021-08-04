@@ -22,11 +22,11 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            'nama_depan' => $this->faker->name(),
-            'nama_belakang' => $this->faker->name(),
-            'telepon_ponsel' => '0738217893',
-            'telepon_rumah' => '03213213667',
-            'email' => $this->faker->unique()->safeEmail,
+            'nama_depan' => $this->faker->firstName(),
+            'nama_belakang' => $this->faker->lastName(),
+            'telepon_ponsel' => '081'.$this->faker->randomNumber($nbDigits = 9,$strict = true),
+            'telepon_rumah' => '0'.$this->faker->numberBetween(1,3).$this->faker->randomNumber($nbDigits = 9,$strict = true),
+            'email' => $this->faker->unique()->safeEmail(),
             'description' => $this->faker->paragraph(),
         ];
 
